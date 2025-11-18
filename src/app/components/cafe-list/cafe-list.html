@@ -1,24 +1,36 @@
-<h2>Lista de Cafés</h2>
+<div class="layout-container">
+  
+  <div class="sidebar">
+    <app-tipo-selector (tipoSeleccionado)="onTipoFiltrado($event)"></app-tipo-selector>
+  </div>
 
-<div *ngIf="cafes.length === 0">
-  <p>Cargando cafés...</p>
+  <div class="main-content">
+    
+    <h2>Lista de Cafés</h2>
+
+    <div *ngIf="cafes.length === 0">
+      <p>Cargando cafés o no hay resultados...</p>
+    </div>
+    
+    <table *ngIf="cafes.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cafe of cafes">
+          <td>{{ cafe.id }}</td>
+          <td>{{ cafe.name }}</td>
+          <td>{{ cafe.description }}</td>
+          <td>{{ cafe.tipo.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
 </div>
-
-<table *ngIf="cafes.length > 0">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Descripción</th>
-      <th>Tipo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cafe of cafes">
-      <td>{{ cafe.id }}</td>
-      <td>{{ cafe.name }}</td>
-      <td>{{ cafe.description }}</td>
-      <td>{{ cafe.tipo.name }}</td> 
-    </tr>
-  </tbody>
-</table>

@@ -1,0 +1,41 @@
+/* src/app/app.component.css */
+
+.app-header {
+  /* --- CÓMO PONER EL COLOR CAFÉ CLARO --- */
+  /* 'tan' es un color web predefinido que es un café claro */
+  /* background-color: tan; */
+  
+  /* Otra opción es usar un código Hexadecimal para un marrón específico */
+  background-color: #A67B5B; 
+  
+  color: white; /* Letras blancas */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center; /* Centra verticalmente el logo y el título */
+}
+
+.logo {
+  height: 40px; /* Ajusta el tamaño de tu logo */
+  margin-right: 15px;
+}
+
+.titulo {
+  font-size: 1.5em; /* Tamaño de letra grande */
+  font-weight: bold;
+}
+
+.app-main {
+  /* Dejamos un alto mínimo para que el footer no se suba */
+  min-height: 80vh; 
+  padding: 20px;
+}
+
+.app-footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}

@@ -1,0 +1,36 @@
+/* src/app/components/cafe-list/cafe-list.component.css */
+.layout-container {
+  display: flex; /* Usamos Flexbox para las columnas */
+  flex-wrap: wrap; /* Permite que se reordenen en pantallas chicas */
+}
+
+.sidebar {
+  flex-basis: 200px; /* Ancho fijo para el sidebar */
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 10px;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+}
+
+.main-content {
+  flex-basis: 0; /* Ocupa el resto del espacio */
+  flex-grow: 1;
+  padding: 10px;
+}
+
+/* Estilo simple para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #eee;
+}
