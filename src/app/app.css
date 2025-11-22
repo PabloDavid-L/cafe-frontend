@@ -1,41 +1,131 @@
-/* src/app/app.component.css */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Altura mínima: 100% de la ventana visible */
+}
 
 .app-header {
-  /* --- CÓMO PONER EL COLOR CAFÉ CLARO --- */
-  /* 'tan' es un color web predefinido que es un café claro */
-  /* background-color: tan; */
-  
-  /* Otra opción es usar un código Hexadecimal para un marrón específico */
-  background-color: #A67B5B; 
-  
-  color: white; /* Letras blancas */
-  padding: 10px 20px;
+  background-color: #A67B5B; /* Tu color café claro */
+  color: white;
+  padding: 0 20px;
+  height: 60px; /* Altura fija */
   display: flex;
-  align-items: center; /* Centra verticalmente el logo y el título */
+  align-items: center;
+  justify-content: space-between; /* Separa Brand de Nav */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombrita sutil */
+}
+
+/* Grupo Logo + Título */
+.brand {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  height: 40px; /* Ajusta el tamaño de tu logo */
-  margin-right: 15px;
+  height: 40px;
+  margin-right: 10px;
 }
 
 .titulo {
-  font-size: 1.5em; /* Tamaño de letra grande */
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
-.app-main {
-  /* Dejamos un alto mínimo para que el footer no se suba */
-  min-height: 80vh; 
-  padding: 20px;
+/* Grupo de Navegación */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espacio entre elementos */
 }
 
-.app-footer {
-  background-color: #333;
+.nav-link {
   color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Botones de Acción en el Header */
+.btn-header {
+  background-color: rgba(255, 255, 255, 0.2); /* Transparente */
+  color: white;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 20px; /* Bordes redondeados */
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.btn-header:hover {
+  background-color: white;
+  color: #A67B5B; /* Invierte colores al pasar el mouse */
+}
+
+/* --- FOOTER --- */
+.app-main {
+  /* LA CLAVE: flex: 1 hace que este elemento crezca para ocupar 
+     todo el espacio sobrante entre el header y el footer */
+  flex: 1; 
+  
+  padding: 20px;
+  background-color: #f4f4f4;
+  
+  /* Opcional: Centra el contenido si es muy angosto */
+  width: 100%; 
+  box-sizing: border-box;
+}
+
+
+/* 4. Footer (Compacto y Definido) */
+.app-footer {
+  background-color: #4e342e;
+  color: #ecf0f1;
+  
+  /* flex-shrink: 0 asegura que el footer no se aplaste si hay mucho contenido */
+  flex-shrink: 0; 
+  
+  border-top: 4px solid #A67B5B;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Separa los elementos */
+  align-items: center; /* Centra verticalmente */
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  /* Reduje el padding para hacerlo más compacto como pediste */
+  padding: 15px 20px; 
+}
+
+.footer-section h4 {
+  margin: 0; /* Quitamos márgenes grandes */
+  font-size: 1rem;
+  color: #d7ccc8;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footer-section p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #aaa;
+  display: inline-block;
+}
+
+.footer-bottom {
+  background-color: #3e2723;
   text-align: center;
-  padding: 10px 0;
-  position: relative;
-  bottom: 0;
-  width: 100%;
+  padding: 5px; /* Muy finito */
+  font-size: 0.75rem;
+  color: #8d6e63;
 }

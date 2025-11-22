@@ -1,34 +1,14 @@
 <div class="layout-container">
   
   <div class="sidebar">
-    
     <app-tipo-selector (tipoSeleccionado)="onTipoFiltrado($event)"></app-tipo-selector>
-    
-    <hr> <div class="header-actions">
-      <h3>Gestión</h3>
-      
-      <div style="margin-bottom: 10px;">
-        <a routerLink="/cafes/nuevo" class="btn-crear">Agregar Café Nuevo</a>
-      </div>
-
-      <div>
-        <a routerLink="/tipos/nuevo" class="btn-crear">Agregar Tipo Nuevo</a>
-      </div>
-      
-      <div style="margin-top: 10px;">
-        <a routerLink="/tipos" class="btn-ver-tipos">Administrar Tipos</a>
-      </div>
-
-    </div>
   </div>
 
   <div class="main-content">
-    <h2>Lista de Cafés</h2>
-    <div *ngIf="cafes.length === 0">
-      <p>Cargando cafés o no hay resultados...</p>
-    </div>
     
-    <table *ngIf="cafes.length > 0">
+    <h2>Lista de Cafés</h2>
+
+    <table *ngIf="cafes.length > 0" class="cafe-table">
       <thead>
         <tr>
           <th>ID</th>
@@ -43,14 +23,20 @@
           <td>{{ cafe.id }}</td>
           <td>{{ cafe.name }}</td>
           <td>{{ cafe.description }}</td>
-          <td>{{ cafe.tipo.name }}</td>
+          <td>{{ cafe.tipo?.name || 'Sin Tipo' }}</td>
           <td>
-             <a [routerLink]="['/cafes/editar', cafe.id]">Editar</a>
-             <button (click)="borrarCafe(cafe.id)">Eliminar</button>
+             <a [routerLink]="['/cafes/editar', cafe.id]" class="btn-accion btn-editar">Editar</a>
+             <button (click)="borrarCafe(cafe.id)" class="btn-accion btn-borrar">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <div *ngIf="cafes.length === 0" class="empty-state">
+      <p>📭 No hay cafés para mostrar.</p>
+      <p>¡Usá el botón <b>"+ Nuevo Café"</b> arriba a la derecha para crear uno!</p>
+    </div>
+
   </div>
 
 </div>
