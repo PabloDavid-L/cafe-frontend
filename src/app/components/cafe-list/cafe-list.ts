@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api';
 import { Cafe } from '../../interfaces/cafe.interface';
 import { Tipo } from '../../interfaces/tipo.interface';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // --- 1. Importar el nuevo componente ---
 import { TipoSelectorComponent } from '../tipo-selector/tipo-selector';
@@ -12,7 +13,7 @@ import { TipoSelectorComponent } from '../tipo-selector/tipo-selector';
   selector: 'app-cafe-list',
   standalone: true,
   // --- 2. Añadir TipoSelectorComponent a los imports ---
-  imports: [CommonModule, TipoSelectorComponent],
+  imports: [CommonModule, TipoSelectorComponent, RouterModule],
   templateUrl: './cafe-list.html',
   styleUrls: ['./cafe-list.css']
 })
@@ -46,6 +47,15 @@ export class CafeListComponent implements OnInit {
       this.cafes = data;
       console.log('Cafés cargados:', this.cafes);
     });
+  }
+
+  borrarCafe(id: number): void {
+    if (confirm('¿Estás seguro de eliminar este café?')) {
+      this.apiService.deleteCafe(id).subscribe(() => {
+        // Actualizamos la lista después de borrar
+        this.cargarCafes(); 
+      });
+    }
   }
 
   // --- 4. Método que recibe el evento del componente hijo ---

@@ -1,13 +1,29 @@
 <div class="layout-container">
   
   <div class="sidebar">
+    
     <app-tipo-selector (tipoSeleccionado)="onTipoFiltrado($event)"></app-tipo-selector>
+    
+    <hr> <div class="header-actions">
+      <h3>Gestión</h3>
+      
+      <div style="margin-bottom: 10px;">
+        <a routerLink="/cafes/nuevo" class="btn-crear">Agregar Café Nuevo</a>
+      </div>
+
+      <div>
+        <a routerLink="/tipos/nuevo" class="btn-crear">Agregar Tipo Nuevo</a>
+      </div>
+      
+      <div style="margin-top: 10px;">
+        <a routerLink="/tipos" class="btn-ver-tipos">Administrar Tipos</a>
+      </div>
+
+    </div>
   </div>
 
   <div class="main-content">
-    
     <h2>Lista de Cafés</h2>
-
     <div *ngIf="cafes.length === 0">
       <p>Cargando cafés o no hay resultados...</p>
     </div>
@@ -19,6 +35,7 @@
           <th>Nombre</th>
           <th>Descripción</th>
           <th>Tipo</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -27,10 +44,13 @@
           <td>{{ cafe.name }}</td>
           <td>{{ cafe.description }}</td>
           <td>{{ cafe.tipo.name }}</td>
+          <td>
+             <a [routerLink]="['/cafes/editar', cafe.id]">Editar</a>
+             <button (click)="borrarCafe(cafe.id)">Eliminar</button>
+          </td>
         </tr>
       </tbody>
     </table>
-
   </div>
 
 </div>

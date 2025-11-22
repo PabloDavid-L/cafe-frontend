@@ -1,0 +1,28 @@
+<div class="form-container">
+  <h2>{{ esEdicion ? 'Editar Café' : 'Nuevo Café' }}</h2>
+
+  <form (ngSubmit)="guardarCafe()">
+
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="cafe.name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="desc">Descripción:</label>
+      <input type="text" id="desc" name="desc" [(ngModel)]="cafe.description">
+    </div>
+
+    <div class="form-group">
+      <label for="tipo">Tipo de Café:</label>
+      <select id="tipo" name="tipo" [(ngModel)]="cafe.tipoId" required>
+        <option [ngValue]="0" disabled>Seleccione un tipo</option>
+        <option *ngFor="let t of tipos" [value]="t.id">{{ t.name }}</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!cafe.name || !cafe.tipoId">Guardar</button>
+    <a routerLink="/cafes" class="btn-cancel">Cancelar</a>
+
+  </form>
+</div>
