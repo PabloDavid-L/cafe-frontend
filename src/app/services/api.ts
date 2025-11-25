@@ -10,15 +10,15 @@ import { CreateCafeDto } from '../interfaces/create-cafe.dto';
 import { CreateTipoDto } from '../interfaces/create-tipo.dto';
 import { UpdateTipoDto } from '../interfaces/update-tipo.dto';
 
-// La URL de tu API de NestJS (la "cocina" que corre en el puerto 3000)
+// La URL de NestJS
 const API_URL = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService { // El nombre de la clase es ApiService
+export class ApiService {
 
-  // Inyectamos el HttpClient de Angular
+  // Inyecta el HttpClient de Angular
   constructor(private http: HttpClient) { }
 
   // --- MÉTODOS DE TIPOS ---
@@ -77,7 +77,7 @@ export class ApiService { // El nombre de la clase es ApiService
     return this.http.get<Cafe>(`${API_URL}/cafes/${id}`);
   }
 
-  /** Crea un nuevo café (usando DTO con tipoId) */
+  /** Crea un nuevo café POST */
   createCafe(cafeDto: CreateCafeDto): Observable<Cafe> {
     return this.http.post<Cafe>(`${API_URL}/cafes`, cafeDto);
   }
@@ -87,7 +87,7 @@ export class ApiService { // El nombre de la clase es ApiService
     return this.http.patch<Cafe>(`${API_URL}/cafes/${id}`, cafeDto);
   }
 
-  /** Elimina un café por su ID */
+  /** Elimina un café DELETE*/
   deleteCafe(id: number): Observable<Cafe> {
     return this.http.delete<Cafe>(`${API_URL}/cafes/${id}`);
   }

@@ -32,7 +32,9 @@
               #tipoField="ngModel"
               [class.is-invalid]="tipoField.invalid && (tipoField.dirty || tipoField.touched)">
         <option [ngValue]="0" disabled>Seleccione un tipo</option>
-        <option *ngFor="let t of tipos" [value]="t.id">{{ t.name }}</option>
+        <option *ngFor="let t of tipos" [value]="t.id">
+          {{ t.name }} - ({{ t.description }})
+        </option>
       </select>
 
       <div *ngIf="tipoField.invalid && (tipoField.dirty || tipoField.touched)" class="error-msg">

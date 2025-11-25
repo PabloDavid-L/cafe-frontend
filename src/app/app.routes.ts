@@ -9,9 +9,9 @@ export const routes: Routes = [
   { path: '', redirectTo: 'cafes', pathMatch: 'full' }, 
   
   // Cuando la URL sea '/cafes', carga CafeListComponent
-  { path: 'cafes', component: CafeListComponent }, 
+  { path: 'cafes', component: CafeListComponent },            // Ruta principal
   { path: 'cafes/nuevo', component: CafeFormComponent },      // Para Crear
-  { path: 'cafes/editar/:id', component: CafeFormComponent },  // Para Editar (con parámetro ID) [cite: 1218]
+  { path: 'cafes/editar/:id', component: CafeFormComponent },  // Para Editar
 
   // --- Rutas de Tipos ---
   { path: 'tipos', component: TipoListComponent },

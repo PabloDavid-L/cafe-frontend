@@ -72,3 +72,10 @@
   margin-bottom: 15px;
   border: 1px solid #f5c6cb;
 }
+
+.col-descripcion {
+  max-width: 300px;
+  white-space: normal;
+  overflow-wrap: break-word; 
+  word-wrap: break-word;
+}

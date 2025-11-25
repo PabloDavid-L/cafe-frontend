@@ -5,14 +5,11 @@ import { Cafe } from '../../interfaces/cafe.interface';
 import { Tipo } from '../../interfaces/tipo.interface';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-// --- 1. Importar el nuevo componente ---
 import { TipoSelectorComponent } from '../tipo-selector/tipo-selector';
 
 @Component({
-  selector: 'app-cafe-list',
+  selector: 'app-cafe-list', //HTML : <app-cafe-list>
   standalone: true,
-  // --- 2. Añadir TipoSelectorComponent a los imports ---
   imports: [CommonModule, TipoSelectorComponent, RouterModule],
   templateUrl: './cafe-list.html',
   styleUrls: ['./cafe-list.css']
@@ -30,13 +27,13 @@ export class CafeListComponent implements OnInit {
     this.cargarCafes(); 
   }
 
-  // --- 3. Modificar cargarCafes para aceptar filtros ---
+  // Modificar cargarCafes para aceptar filtros 
   cargarCafes(filtros: { tipoId?: number } = {}): void {
-    this.errorCarga = ''; // Limpiar error previo
+    this.errorCarga = '';
     
     // Preparamos los parámetros para el QueryDTO del backend
     const params: any = {
-      limit: 20, // Podés poner los defaults que quieras
+      limit: 20,
       page: 1,
     };
 
@@ -60,7 +57,6 @@ export class CafeListComponent implements OnInit {
     if (confirm('¿Estás seguro de eliminar este café?')) {
       this.apiService.deleteCafe(id).subscribe({
         next: () => {
-          // Feedback sutil o recarga
           this.cargarCafes(); 
         },
         error: (err) => {
@@ -70,7 +66,7 @@ export class CafeListComponent implements OnInit {
     }
   }
 
-  // --- 4. Método que recibe el evento del componente hijo ---
+  // Método que recibe el evento del componente hijo 
   onTipoFiltrado(tipoId: number | null): void {
     if (tipoId) {
       // Si recibimos un ID, filtramos
