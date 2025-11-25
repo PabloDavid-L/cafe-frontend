@@ -20,7 +20,8 @@ import { TipoSelectorComponent } from '../tipo-selector/tipo-selector';
 export class CafeListComponent implements OnInit {
 
   cafes: Cafe[] = [];
-  tipos: Tipo[] = []; // Ya no necesitamos 'tipos' aquí, el selector lo maneja
+  tipos: Tipo[] = [];
+  errorCarga: string = '';
   
   constructor(private apiService: ApiService) { }
 
@@ -31,6 +32,7 @@ export class CafeListComponent implements OnInit {
 
   // --- 3. Modificar cargarCafes para aceptar filtros ---
   cargarCafes(filtros: { tipoId?: number } = {}): void {
+    this.errorCarga = ''; // Limpiar error previo
     
     // Preparamos los parámetros para el QueryDTO del backend
     const params: any = {
@@ -43,17 +45,27 @@ export class CafeListComponent implements OnInit {
     }
 
     // Llamamos al servicio con los filtros
-    this.apiService.getCafes(params).subscribe(data => {
-      this.cafes = data;
-      console.log('Cafés cargados:', this.cafes);
+    this.apiService.getCafes(params).subscribe({
+      next: (data) => {
+        this.cafes = data;
+      },
+      error: (err) => {
+        console.error('Error cargando cafés', err);
+        this.errorCarga = 'No se pudo conectar con el servidor. Por favor, revisa tu conexión.';
+      }
     });
   }
 
   borrarCafe(id: number): void {
     if (confirm('¿Estás seguro de eliminar este café?')) {
-      this.apiService.deleteCafe(id).subscribe(() => {
-        // Actualizamos la lista después de borrar
-        this.cargarCafes(); 
+      this.apiService.deleteCafe(id).subscribe({
+        next: () => {
+          // Feedback sutil o recarga
+          this.cargarCafes(); 
+        },
+        error: (err) => {
+          alert('No se pudo eliminar el café. Puede que ya no exista.');
+        }
       });
     }
   }

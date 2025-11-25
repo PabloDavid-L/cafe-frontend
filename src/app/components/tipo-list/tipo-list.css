@@ -63,3 +63,12 @@
 
 .btn-editar { background-color: #ffc107; color: #333; }
 .btn-borrar { background-color: #dc3545; color: white; }
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  border: 1px solid #f5c6cb;
+}

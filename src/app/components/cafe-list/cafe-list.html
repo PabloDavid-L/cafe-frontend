@@ -8,6 +8,10 @@
     
     <h2>Lista de Cafés</h2>
 
+    <div *ngIf="errorCarga" class="alert-error">
+      {{ errorCarga }}
+    </div>
+
     <table *ngIf="cafes.length > 0" class="cafe-table">
       <thead>
         <tr>
@@ -23,7 +27,7 @@
           <td>{{ cafe.id }}</td>
           <td>{{ cafe.name }}</td>
           <td>{{ cafe.description }}</td>
-          <td>{{ cafe.tipo?.name || 'Sin Tipo' }}</td>
+          <td>{{ cafe.tipo.name }}</td>
           <td>
              <a [routerLink]="['/cafes/editar', cafe.id]" class="btn-accion btn-editar">Editar</a>
              <button (click)="borrarCafe(cafe.id)" class="btn-accion btn-borrar">Eliminar</button>
@@ -32,7 +36,7 @@
       </tbody>
     </table>
 
-    <div *ngIf="cafes.length === 0" class="empty-state">
+    <div *ngIf="cafes.length === 0 && !errorCarga" class="empty-state">
       <p>📭 No hay cafés para mostrar.</p>
       <p>¡Usá el botón <b>"+ Nuevo Café"</b> arriba a la derecha para crear uno!</p>
     </div>

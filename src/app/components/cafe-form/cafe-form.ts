@@ -25,6 +25,7 @@ export class CafeFormComponent implements OnInit {
   tipos: Tipo[] = []; // Para llenar el select
   esEdicion: boolean = false;
   idCafeEditar: number | null = null;
+  mensajeError: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -58,16 +59,34 @@ export class CafeFormComponent implements OnInit {
     });
   }
 
-  guardarCafe(): void {
+guardarCafe(): void {
+    // Reiniciamos error
+    this.mensajeError = '';
+
     if (this.esEdicion && this.idCafeEditar) {
-      // ACTUALIZAR (PATCH)
-      this.apiService.updateCafe(this.idCafeEditar, this.cafe).subscribe(() => {
-        this.router.navigate(['/cafes']); // Volver a la lista
+      // EDITAR
+      this.apiService.updateCafe(this.idCafeEditar, this.cafe).subscribe({
+        next: () => {
+          alert('¡Café actualizado correctamente!'); // Feedback de éxito
+          this.router.navigate(['/cafes']);
+        },
+        error: (err) => {
+          console.error('Error al actualizar:', err);
+          this.mensajeError = 'Error al actualizar el café. Intente nuevamente.';
+        }
       });
     } else {
-      // CREAR (POST)
-      this.apiService.createCafe(this.cafe).subscribe(() => {
-        this.router.navigate(['/cafes']); // Volver a la lista
+      // CREAR
+      this.apiService.createCafe(this.cafe).subscribe({
+        next: () => {
+          alert('¡Café creado con éxito!'); // Feedback de éxito
+          this.router.navigate(['/cafes']);
+        },
+        error: (err) => {
+          console.error('Error al crear:', err);
+          // Mostramos el mensaje que viene del backend si existe
+          this.mensajeError = err.error?.message || 'Ocurrió un error al crear el café.';
+        }
       });
     }
   }

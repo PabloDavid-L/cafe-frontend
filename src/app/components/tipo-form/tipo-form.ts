@@ -13,7 +13,6 @@ import { CreateTipoDto } from '../../interfaces/create-tipo.dto';
   styleUrls: ['./tipo-form.css']
 })
 export class TipoFormComponent implements OnInit {
-  // Modelo para el formulario
   tipo: CreateTipoDto = {
     name: '',
     description: ''
@@ -21,6 +20,7 @@ export class TipoFormComponent implements OnInit {
 
   esEdicion = false;
   idTipoEditar: number | null = null;
+  mensajeError: string = ''; // Para mostrar errores en el HTML
 
   constructor(
     private apiService: ApiService,
@@ -29,31 +29,40 @@ export class TipoFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Chequear si hay un ID en la URL (modo edición)
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
         this.esEdicion = true;
         this.idTipoEditar = +id;
-        // Cargar datos del tipo para editar
-        this.apiService.getTipoById(this.idTipoEditar).subscribe(data => {
-          this.tipo = { name: data.name, description: data.description };
+        this.apiService.getTipoById(this.idTipoEditar).subscribe({
+          next: (data) => {
+            this.tipo = { name: data.name, description: data.description };
+          },
+          error: (err) => {
+            console.error(err);
+            this.mensajeError = 'No se pudo cargar el tipo para editar.';
+          }
         });
       }
     });
   }
 
   guardarTipo() {
-    if (this.esEdicion && this.idTipoEditar) {
-      // Editar
-      this.apiService.updateTipo(this.idTipoEditar, this.tipo).subscribe(() => {
+    this.mensajeError = ''; // Limpiar errores previos
+
+    const observable = (this.esEdicion && this.idTipoEditar)
+      ? this.apiService.updateTipo(this.idTipoEditar, this.tipo)
+      : this.apiService.createTipo(this.tipo);
+
+    observable.subscribe({
+      next: () => {
+        alert(this.esEdicion ? '¡Tipo actualizado!' : '¡Tipo creado con éxito!');
         this.router.navigate(['/tipos']);
-      });
-    } else {
-      // Crear
-      this.apiService.createTipo(this.tipo).subscribe(() => {
-        this.router.navigate(['/tipos']);
-      });
-    }
+      },
+      error: (err) => {
+        console.error('Error al guardar:', err);
+        this.mensajeError = err.error?.message || 'Ocurrió un error al guardar el tipo. Verificá los datos.';
+      }
+    });
   }
 }

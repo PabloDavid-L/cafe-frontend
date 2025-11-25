@@ -13,6 +13,7 @@ import { Tipo } from '../../interfaces/tipo.interface';
 })
 export class TipoListComponent implements OnInit {
   tipos: Tipo[] = [];
+  errorCarga: string = ''; // Nueva variable
 
   constructor(private apiService: ApiService) {}
 
@@ -21,15 +22,29 @@ export class TipoListComponent implements OnInit {
   }
 
   cargarTipos() {
-    this.apiService.getTipos().subscribe(data => {
-      this.tipos = data;
+    this.errorCarga = '';
+    this.apiService.getTipos().subscribe({
+      next: (data) => {
+        this.tipos = data;
+      },
+      error: (err) => {
+        console.error('Error cargando tipos', err);
+        this.errorCarga = 'No se pudo conectar con el servidor para cargar los tipos.';
+      }
     });
   }
 
   borrarTipo(id: number) {
     if(confirm('¿Seguro que querés borrar este tipo?')) {
-      this.apiService.deleteTipo(id).subscribe(() => {
-        this.cargarTipos(); // Recargar la lista
+      this.apiService.deleteTipo(id).subscribe({
+        next: () => {
+          this.cargarTipos();
+        },
+        error: (err) => {
+          // El error más común aquí es que el tipo tenga cafés asociados (Foregin Key constraint)
+          alert('No se pudo eliminar el tipo. Verificá que no tenga cafés asociados.');
+          console.error(err);
+        }
       });
     }
   }

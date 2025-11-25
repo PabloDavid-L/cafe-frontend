@@ -12,6 +12,10 @@
     
     <h2>Lista de Tipos</h2>
 
+    <div *ngIf="errorCarga" class="alert-error">
+      {{ errorCarga }}
+    </div>
+
     <table *ngIf="tipos.length > 0" class="cafe-table">
       <thead>
         <tr>
@@ -34,7 +38,7 @@
       </tbody>
     </table>
 
-    <div *ngIf="tipos.length === 0" class="empty-state">
+    <div *ngIf="tipos.length === 0 && !errorCarga" class="empty-state">
       <p>📭 No hay tipos de café cargados.</p>
       <p>¡Usá el botón <b>"+ Nuevo Tipo"</b> en el menú superior para crear uno!</p>
     </div>
