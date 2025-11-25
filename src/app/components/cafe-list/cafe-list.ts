@@ -1,4 +1,3 @@
-// src/app/components/cafe-list/cafe-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api';
 import { Cafe } from '../../interfaces/cafe.interface';
