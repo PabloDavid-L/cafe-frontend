@@ -72,3 +72,37 @@
   margin-bottom: 15px;
   border: 1px solid #f5c6cb;
 }
+
+/* --- RESPONSIVE: Para pantallas menores a 768px (Tablets y Celulares) --- */
+@media (max-width: 768px) {
+  
+  .layout-container {
+    flex-direction: column; /* Cambia de lado-a-lado a uno-abajo-del-otro */
+  }
+
+  .sidebar {
+    width: 100%; /* Ocupa todo el ancho */
+    border-right: none; /* Sacamos el borde derecho */
+    border-bottom: 1px solid #e0e0e0; /* Ponemos borde abajo */
+    padding: 15px;
+    box-sizing: border-box; /* Evita que el padding rompa el ancho */
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  /* Hacemos que la tabla tenga scroll horizontal si es muy ancha */
+  .main-content {
+    overflow-x: auto; 
+  }
+  
+  /* Ajustamos botones en móviles para que sean más fáciles de tocar */
+  .btn-accion {
+    padding: 8px 12px; 
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+}
