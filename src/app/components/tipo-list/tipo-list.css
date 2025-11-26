@@ -73,36 +73,81 @@
   border: 1px solid #f5c6cb;
 }
 
-/* --- RESPONSIVE: Para pantallas menores a 768px (Tablets y Celulares) --- */
+
+/* --- RESPONSIVE: Transformar Tabla a Tarjetas --- */
 @media (max-width: 768px) {
-  
-  .layout-container {
-    flex-direction: column; /* Cambia de lado-a-lado a uno-abajo-del-otro */
-  }
 
-  .sidebar {
-    width: 100%; /* Ocupa todo el ancho */
-    border-right: none; /* Sacamos el borde derecho */
-    border-bottom: 1px solid #e0e0e0; /* Ponemos borde abajo */
-    padding: 15px;
-    box-sizing: border-box; /* Evita que el padding rompa el ancho */
-  }
-
-  .main-content {
+  /* Desarmar la tabla */
+  .cafe-table, .cafe-table tbody, .cafe-table tr, .cafe-table td {
+    display: block;
     width: 100%;
+  }
+
+  /* Ocultar encabezados */
+  .cafe-table thead {
+    display: none;
+  }
+
+  /* Estilo de Tarjeta para la fila */
+  .cafe-table tr {
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     padding: 15px;
     box-sizing: border-box;
   }
 
-  /* Hacemos que la tabla tenga scroll horizontal si es muy ancha */
-  .main-content {
-    overflow-x: auto; 
+  /* Estilo de celdas */
+  .cafe-table td {
+    text-align: left;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 0;
+  }
+
+  .cafe-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Títulos de los datos (Label) */
+  .cafe-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    color: #A67B5B;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  /* Ocultar label en acciones */
+  .cafe-table td.acciones-cell::before {
+    display: none;
   }
   
-  /* Ajustamos botones en móviles para que sean más fáciles de tocar */
+  /* Botones de acción */
+  .acciones-cell {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px !important;
+    border-top: 2px solid #f4f4f4;
+  }
+  
   .btn-accion {
-    padding: 8px 12px; 
-    margin-bottom: 5px;
-    display: inline-block;
+    flex: 1;
+    text-align: center;
+    margin: 0 5px;
+    padding: 10px;
+  }
+
+  /* Nombre destacado */
+  .dato-nombre {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
   }
 }

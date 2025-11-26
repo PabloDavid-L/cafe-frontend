@@ -19,28 +19,31 @@
     <div class="table-responsive">
 
       <table *ngIf="tipos.length > 0" class="cafe-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th class="col-descripcion">Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let t of tipos">
-              <td>{{ t.id }}</td>
-              <td>{{ t.name }}</td>
-              
-              <td class="col-descripcion">{{ t.description }}</td>
-              
-              <td>
-                 <a [routerLink]="['/tipos/editar', t.id]" class="btn-accion btn-editar">Editar</a>
-                 <button (click)="borrarTipo(t.id)" class="btn-accion btn-borrar">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-      </table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th class="col-descripcion">Descripción</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of tipos">
+      
+      <td data-label="ID">{{ t.id }}</td>
+      
+      <td data-label="Nombre" class="dato-nombre">{{ t.name }}</td>
+      
+      <td data-label="Descripción" class="col-descripcion">{{ t.description }}</td>
+      
+      <td class="acciones-cell">
+         <a [routerLink]="['/tipos/editar', t.id]" class="btn-accion btn-editar">Editar</a>
+         <button (click)="borrarTipo(t.id)" class="btn-accion btn-borrar">Eliminar</button>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
 
     </div>
     <div *ngIf="tipos.length === 0 && !errorCarga" class="empty-state">
