@@ -12,18 +12,19 @@
       {{ errorCarga }}
     </div>
 
-    <table *ngIf="cafes.length > 0" class="cafe-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th class="col-descripcion">Descripción</th>
-          <th>Tipo</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cafe of cafes">
+    <div class="table-responsive">
+  
+  <table *ngIf="cafes.length > 0" class="cafe-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th class="col-descripcion">Descripción</th> <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cafe of cafes">
           <td>{{ cafe.id }}</td>
           <td>{{ cafe.name }}</td>
           <td class="col-descripcion">{{ cafe.description }}</td>
