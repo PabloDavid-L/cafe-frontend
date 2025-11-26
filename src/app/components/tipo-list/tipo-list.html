@@ -18,28 +18,31 @@
 
     <div class="table-responsive">
 
-  <table *ngIf="tipos.length > 0" class="cafe-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th class="col-descripcion">Descripción</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let t of tipos">
-          <td>{{ t.id }}</td>
-          <td>{{ t.name }}</td>
-          <td>{{ t.description }}</td>
-          <td>
-             <a [routerLink]="['/tipos/editar', t.id]" class="btn-accion btn-editar">Editar</a>
-             <button (click)="borrarTipo(t.id)" class="btn-accion btn-borrar">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <table *ngIf="tipos.length > 0" class="cafe-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th class="col-descripcion">Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of tipos">
+              <td>{{ t.id }}</td>
+              <td>{{ t.name }}</td>
+              
+              <td class="col-descripcion">{{ t.description }}</td>
+              
+              <td>
+                 <a [routerLink]="['/tipos/editar', t.id]" class="btn-accion btn-editar">Editar</a>
+                 <button (click)="borrarTipo(t.id)" class="btn-accion btn-borrar">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
 
+    </div>
     <div *ngIf="tipos.length === 0 && !errorCarga" class="empty-state">
       <p>📭 No hay tipos de café cargados.</p>
       <p>¡Usá el botón <b>"+ Nuevo Tipo"</b> en el menú superior para crear uno!</p>

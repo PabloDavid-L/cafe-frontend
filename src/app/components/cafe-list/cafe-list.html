@@ -13,38 +13,41 @@
     </div>
 
     <div class="table-responsive">
-  
-  <table *ngIf="cafes.length > 0" class="cafe-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th class="col-descripcion">Descripción</th> <th>Tipo</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let cafe of cafes">
-          <td>{{ cafe.id }}</td>
-          <td>{{ cafe.name }}</td>
-          <td class="col-descripcion">{{ cafe.description }}</td>
-          
-          <td class="col-descripcion">
-            <strong>{{ cafe.tipo.name }}</strong>
-            <br>
-            <small style="color: #666; font-style: italic;">
-              {{ cafe.tipo.description }}
-            </small>
-          </td>
-          
-          <td>
-             <a [routerLink]="['/cafes/editar', cafe.id]" class="btn-accion btn-editar">Editar</a>
-             <button (click)="borrarCafe(cafe.id)" class="btn-accion btn-borrar">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      
+      <table *ngIf="cafes.length > 0" class="cafe-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th class="col-descripcion">Descripción</th> 
+            <th>Tipo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cafe of cafes">
+            <td>{{ cafe.id }}</td>
+            <td>{{ cafe.name }}</td>
+            
+            <td class="col-descripcion">{{ cafe.description }}</td>
+            
+            <td class="col-descripcion">
+              <strong>{{ cafe.tipo.name }}</strong>
+              <br>
+              <small style="color: #666; font-style: italic;">
+                {{ cafe.tipo.description }}
+              </small>
+            </td>
+            
+            <td>
+               <a [routerLink]="['/cafes/editar', cafe.id]" class="btn-accion btn-editar">Editar</a>
+               <button (click)="borrarCafe(cafe.id)" class="btn-accion btn-borrar">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
+    </div> 
     <div *ngIf="cafes.length === 0 && !errorCarga" class="empty-state">
       <p>📭 No hay cafés para mostrar.</p>
       <p>¡Usá el botón <b>"+ Nuevo Café"</b> arriba a la derecha para crear uno!</p>
