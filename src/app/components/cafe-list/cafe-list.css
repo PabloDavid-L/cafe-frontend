@@ -85,6 +85,23 @@
 /* --- RESPONSIVE: Transformar Tabla a Tarjetas --- */
 @media (max-width: 768px) {
 
+  /* --- AGREGAR ESTO: Arreglar el Layout General --- */
+  .layout-container {
+    flex-direction: column; /* Pone el Sidebar arriba y la Lista abajo */
+  }
+
+  .sidebar {
+    width: 100%; /* Ocupa todo el ancho */
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 10px;
+  }
+
   /* 1. Desarmamos la estructura de tabla rígida */
   .cafe-table, .cafe-table tbody, .cafe-table tr, .cafe-table td {
     display: block;
